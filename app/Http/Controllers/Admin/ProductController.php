@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-        return 'ok';
+        $products = Product::all();
+        return Inertia::render('Admin/Product/Index', ['products' => $products]);
     }
 
     /**
@@ -29,7 +34,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->fill($request->all())->save();
+
+        //check if product has images upload
+
+        if ($request->hasFile('product_images')) {
+            $productImages = collect($request->file('product_images'));
+            $productImages->each(function ($image) use ($product) {
+                $uniqueName = time() . '_' . Str::random(10) . $image->getClientOriginalExtension();
+                $path = public_path('storage/product_images', $uniqueName);
+                $image->move($path);
+                (new ProductImage())->fill([
+                    'product_id' => $product->id,
+                    'image' => $path
+                ])->save();
+            });
+        }
+        return Redirect::route('admin.products.index')->with('success', 'Product created.');
     }
 
     /**
