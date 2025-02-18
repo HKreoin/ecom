@@ -8,7 +8,7 @@ defineProps({
 
 <template>
     <AdminLayout>
-        <main class="h-auto p-4 pt-20 md:ml-64">
+        <div>
             <div
                 class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
             >
@@ -59,6 +59,6 @@ defineProps({
                     class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
                 ></div>
             </div>
-        </main>
+        </div>
     </AdminLayout>
 </template>
