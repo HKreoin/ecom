@@ -39,8 +39,8 @@ import { Link } from '@inertiajs/vue3';
             </form>
             <ul class="space-y-2">
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        :href="route('admin.dashboard')"
                         class="group flex items-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                     >
                         <svg
@@ -58,7 +58,7 @@ import { Link } from '@inertiajs/vue3';
                             ></path>
                         </svg>
                         <span class="ml-3">Dashboard</span>
-                    </a>
+                    </Link>
                 </li>
                 <li>
                     <button
