@@ -9,6 +9,6 @@ defineProps({
 
 <template>
     <AdminLayout>
-    <ProductList></ProductList>
+        <ProductList></ProductList>
     </AdminLayout>
 </template>
